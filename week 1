@@ -7,10 +7,10 @@ def date_sorter():
     date_df = df
     mon2int = dict([(m, i+1) for i, m in enumerate('Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(","))])
     rule1 = r'(?P<month>\d{1,2})[/-](?P<day>\d{1,2})[/-](?P<year>\d{4})'
-    rule2 = r'(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.]?[ -](?P<day>\d{1,2})(?:\w{2})?[,]?[ -](?P<year>\d{4})'
+    rule2 = r'(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.,]?[ -](?P<day>\d{1,2})(?:\w{2})?[,]?[ -](?P<year>\d{4})'
     rule3 = r'(?P<day>\d{1,2}) (?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.,]? (?P<year>\d{4})'
     rule4 = r'(?P<month>\d{1,2})[/-](?P<day>\d{1,2})[/-](?P<year>\d{2})'
-    rule5 = r'(?P<day>)(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*) (?P<year>\d{4})'
+    rule5 = r'(?P<day>)(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.,]?[ -](?P<year>\d{4})'
     rule6 = r'(?P<day>)(?P<month>\d{1,2})/(?P<year>\d{4})'
     rule7 = r'(?P<day>)(?P<month>)(?:\D|^)(?P<year>\d{4})(?:\D|$)'
     
