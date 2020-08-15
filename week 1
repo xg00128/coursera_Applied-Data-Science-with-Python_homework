@@ -10,21 +10,16 @@ def date_sorter():
     rule2 = r'(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.]?[ -](?P<day>\d{1,2})(?:\w{2})?[,]?[ -](?P<year>\d{4})'
     rule3 = r'(?P<day>\d{1,2}) (?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)[.,]? (?P<year>\d{4})'
     rule4 = r'(?P<month>\d{1,2})[/-](?P<day>\d{1,2})[/-](?P<year>\d{2})'
-#    rule5 = r'(?P<day>)(?P<month>(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*) (?P<year>\d{4})'
-#    rule6 = r'(?P<day>)(?P<month>\d{1,2})/(?P<year>\d{4})'
-#    rule7 = r'(?P<day>)(?P<month>)(?:\D|^)(?P<year>\d{4})(?:\D|$)'
+    rule5 = r'(?P<day>)(?P<month>(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*) (?P<year>\d{4})'
+    rule6 = r'(?P<day>)(?P<month>\d{1,2})/(?P<year>\d{4})'
+    rule7 = r'(?P<day>)(?P<month>)(?:\D|^)(?P<year>\d{4})(?:\D|$)'
     
-#    rule_list = [rule1, rule2, rule3, rule4, rule5, rule6, rule7]
-    rule_list = [rule1, rule2, rule3, rule4]
+    rule_list = [rule1, rule2, rule3, rule4, rule5, rule6, rule7]
     extract_df_list = [df.str.extract(rule) for rule in rule_list]
     date_df = reduce(lambda x,y: x.fillna(y),extract_df_list)
-
-    date_df = date_df.dropna()
     
     date_df['month'] = date_df['month'].apply(lambda x: mon2int.get(str(x)[:3],x))
     date_df['month'] = date_df['month'].fillna('1').apply(lambda x: '1' if x=='' else x)
-    
-
 
     date_df['year'] = date_df['year'].apply(lambda x: '19'+x if len(x)==2 else x)
 
@@ -33,11 +28,11 @@ def date_sorter():
     date_df = date_df[["year","month","day"]].astype(int)
     date_df['text'] = df
     
-#    date_df = date_df.sort_values(['year','month','day'],ascending=True)
+    index_df = date_df.sort_values(['year','month','day'],ascending=True).reset_index()
 #    index_df = date_df.sort_values(['year','month','day'], axis=0, ascending=False).reset_index()
-#    index_df = index_df['index']
+    index_df = index_df['index']
 
     
-    return date_df.iloc[30]
+    return index_df
 
 date_sorter()
